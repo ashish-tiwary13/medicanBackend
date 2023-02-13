@@ -1,17 +1,18 @@
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
+const { executablePath } = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const hidden = require('puppeteer-extra-plugin-stealth');
 
 const one= async(search) => {
+  puppeteer.use(hidden());
   const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: executablePath(),
     args: [
       "--no-sandbox",
-      "--disable-setuid-sandbox",
-      // "--disable-dev-shm-usage",
-      // "--disable-accelerated-2d-canvas",
-      // "--no-first-run",
-      // "--no-zygote",
-      // "--single-process", // <- this one doesn't works in Windows
-      // "--disable-gpu",
-    ]
+      "--disable-setuid-sandbox", 
+    ],
+    ignoreHTTPSErrors: true,
   });
     const page = await browser.newPage();
     await page.goto(`https://www.apollopharmacy.in/search-medicines/${search}`);
