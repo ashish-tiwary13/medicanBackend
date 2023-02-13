@@ -1,9 +1,7 @@
 const puppeteer = require("puppeteer");
 
 const one= async(search) => {
-    const browser = await puppeteer.launch({
-      headless: false,
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://www.apollopharmacy.in/search-medicines/${search}`);
     
