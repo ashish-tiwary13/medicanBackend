@@ -15,7 +15,7 @@ const one= async(search) => {
     ignoreHTTPSErrors: true,
   });
     const page = await browser.newPage();
-    await page.goto(`https://www.apollopharmacy.in/search-medicines/${search}`);
+    await page.goto(`https://www.apollopharmacy.in/search-medicines/${search}`, { waitUntil: 'load' });
     
     
     const data = await page.evaluate(() => {
@@ -100,6 +100,7 @@ for(let i=0;i<imagelist.length;i++){
       return pharmas
     });
     // console.log(search)
+    await page.close();
     await browser.close();
     return data;
 }
